@@ -1,13 +1,14 @@
-package ua.nure.kudria.practice6;
+package ua.nure.kudria.practice6.part2;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class Part2 {
 
-    private static final int MAX_ELEMENTS = 10_000;
+    private static final int N = 10_000;
     private static final int K = 3;
 
     public static long removeByIndex(List<?> list, int k) {
@@ -51,8 +52,8 @@ public class Part2 {
     }
 
     public static List<Object> init(List<Object> list) {
-        for (int i = 0; i < MAX_ELEMENTS; i++) {
-            list.add(i);
+        for (int i = 0; i < N; i++) {
+            list.add(new Random().nextInt());
         }
         return list;
     }

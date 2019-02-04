@@ -1,5 +1,8 @@
 package ua.nure.kudria.practice6;
 
+import ua.nure.kudria.practice6.part1.Part1;
+import ua.nure.kudria.practice6.part2.Part2;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
