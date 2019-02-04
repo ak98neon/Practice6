@@ -1,7 +1,6 @@
 package ua.nure.kudria.practice6;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -41,12 +40,7 @@ public class WordContainer {
 
     private static void print() {
         List<Word> list = new ArrayList<>(words.values());
-        list.sort(new Comparator<Word>() {
-            @Override
-            public int compare(Word o1, Word o2) {
-                return o2.getFrequency() - o1.getFrequency();
-            }
-        });
+        list.sort((o1, o2) -> o2.getFrequency() - o1.getFrequency());
         for (Word word : list) {
             System.out.println(word.getContent() + " : " + word.getFrequency());
         }
