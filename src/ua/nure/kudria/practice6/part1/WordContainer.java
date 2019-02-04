@@ -1,7 +1,5 @@
 package ua.nure.kudria.practice6.part1;
 
-import ua.nure.kudria.practice6.Word;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

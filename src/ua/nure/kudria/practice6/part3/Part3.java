@@ -1,4 +1,4 @@
-package ua.nure.kudria.practice6;
+package ua.nure.kudria.practice6.part3;
 
 public class Part3 {
 

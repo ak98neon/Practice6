@@ -1,4 +1,4 @@
-package ua.nure.kudria.practice6;
+package ua.nure.kudria.practice6.part7;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
