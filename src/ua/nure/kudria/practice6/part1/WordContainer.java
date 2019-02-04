@@ -1,4 +1,6 @@
-package ua.nure.kudria.practice6;
+package ua.nure.kudria.practice6.part1;
+
+import ua.nure.kudria.practice6.Word;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +13,10 @@ import java.util.TreeMap;
  */
 public class WordContainer {
     private static final String ENCODING = "Cp1251";
-    private static Map<String, Word> words = new TreeMap<>();
+    private Map<String, Word> words = new TreeMap<>();
 
     public static void main(String[] args) {
+        WordContainer wordContainer = new WordContainer();
         try (Scanner scanner = new Scanner(System.in, ENCODING)) {
             String input;
             while (true) {
@@ -21,13 +24,13 @@ public class WordContainer {
                 if ("stop".equalsIgnoreCase(input)) {
                     break;
                 }
-                add(input);
+                wordContainer.add(input);
             }
-            print();
+            wordContainer.print();
         }
     }
 
-    private static void add(final String input) {
+    private void add(final String input) {
         if (words.containsKey(input)) {
             Word wordFind = words.get(input);
             wordFind.setFrequency(wordFind.getFrequency() + 1);
@@ -38,7 +41,7 @@ public class WordContainer {
         }
     }
 
-    private static void print() {
+    private void print() {
         List<Word> list = new ArrayList<>(words.values());
         list.sort((o1, o2) -> o2.getFrequency() - o1.getFrequency());
         for (Word word : list) {
