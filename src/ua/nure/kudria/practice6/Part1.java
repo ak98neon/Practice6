@@ -3,6 +3,6 @@ package ua.nure.kudria.practice6;
 public class Part1 {
 
     public static void main(String[] args) {
-		WordContainer.main(new String[]{});
+        WordContainer.main(new String[]{});
     }
 }
