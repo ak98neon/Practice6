@@ -1,42 +1,73 @@
 package ua.nure.kudria.practice6;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Range implements Iterable<Integer> {
-    int n;
-    int m;
-    boolean reverse;
+    private int n;
+    private int m;
 
     public Range(int n, int m) {
-        super();
-        this.n = n;
-        this.m = m;
+        if (n <= m) {
+            this.n = n;
+            this.m = m;
+        }
     }
 
-    public Range(int n, int m, boolean reverse) {
-        super();
-        this.n = n;
-        this.m = m;
-        this.reverse = reverse;
+    Range(int n, int m, boolean reverse) {
+        if (!reverse) {
+            if (n <= m) {
+                this.n = n;
+                this.m = m;
+            }
+        } else {
+            if (m >= n) {
+                this.n = m;
+                this.m = n;
+            }
+        }
     }
 
     @Override
     public Iterator<Integer> iterator() {
-        return new RangeIterator();
+        return new RangeIterator(n, m);
     }
 
-    public class RangeIterator implements Iterator<Integer> {
+    private static final class RangeIterator implements Iterator<Integer> {
+        private int cursor;
+
+        private int m;
+
+        private boolean isGrow;
+
+        RangeIterator(int n, int m) {
+            this.cursor = n;
+            this.m = m;
+            this.isGrow = (n <= m);
+        }
 
         @Override
         public boolean hasNext() {
-            return false;
+            if (isGrow) {
+                return (cursor <= m);
+            } else {
+                return (cursor >= m);
+            }
+
         }
 
         @Override
         public Integer next() {
-            return null;
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            int element = cursor;
+            if (isGrow) {
+                cursor++;
+            } else {
+                cursor--;
+            }
+            return element;
         }
-
     }
-
 }
