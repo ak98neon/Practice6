@@ -6,8 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -68,22 +68,35 @@ public class Part6 {
         Map<String, Integer> maxWords = new TreeMap<>(Collections.reverseOrder());
         String[] txtArr = text.trim().split(" ");
         txtArr = removeNullValue(txtArr);
-        Arrays.sort(txtArr, Collections.reverseOrder());
+
+        Map<String, Integer> frequencyList = new LinkedHashMap<>();
+        for (int i = 0; i < txtArr.length; i++) {
+            int count = 1;
+            for (int j = 0; j < txtArr.length; j++) {
+                if (i == j) {
+                    continue;
+                }
+
+                if (frequencyList.containsKey(txtArr[i])) {
+                    break;
+                }
+
+                if (txtArr[j].equals(txtArr[i])) {
+                    count++;
+                }
+            }
+            if (!frequencyList.containsKey(txtArr[i])) {
+                frequencyList.put(txtArr[i], count);
+            }
+        }
 
         for (int i = 0; i < 3; i++) {
-            String maxWord = "", word = "";
-            int maxCount = 0, count = 1;
-
-            for (String s : txtArr) {
-                if (s.equals(word) && !maxWords.containsKey(word)) {
-                    count++;
-                } else {
-                    if (count > maxCount) {
-                        maxCount = count;
-                        maxWord = word;
-                    }
-                    word = s;
-                    count = 1;
+            String maxWord = "";
+            int maxCount = 1;
+            for (Map.Entry<String, Integer> element : frequencyList.entrySet()) {
+                if (element.getValue() > maxCount && !maxWords.containsKey(element.getKey())) {
+                    maxWord = element.getKey();
+                    maxCount = element.getValue();
                 }
             }
             maxWords.put(maxWord, maxCount);
