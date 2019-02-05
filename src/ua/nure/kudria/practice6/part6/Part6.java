@@ -7,10 +7,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.TreeMap;
 
 public class Part6 {
     private static List<String> commands;
@@ -64,10 +65,10 @@ public class Part6 {
     }
 
     public static void frequency(String text) {
-        Map<String, Integer> maxWords = new HashMap<>();
+        Map<String, Integer> maxWords = new TreeMap<>(Collections.reverseOrder());
         String[] txtArr = text.trim().split(" ");
         txtArr = removeNullValue(txtArr);
-        Arrays.sort(txtArr);
+        Arrays.sort(txtArr, Collections.reverseOrder());
 
         for (int i = 0; i < 3; i++) {
             String maxWord = "", word = "";
@@ -87,6 +88,7 @@ public class Part6 {
             }
             maxWords.put(maxWord, maxCount);
         }
+
 
         for (Map.Entry<String, Integer> elem : maxWords.entrySet()) {
             System.out.println(elem.getKey() + " ==> " + elem.getValue());
