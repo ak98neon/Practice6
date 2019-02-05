@@ -67,37 +67,32 @@ public class Tree<T extends Comparable<T>> {
     private Node<T> remove(Node<T> p, T toDelete) {
         if (p == null) {
             search(root, toDelete);
-        } else if (compare(toDelete, p.data) < 0)
+        } else if (compare(toDelete, p.data) < 0) {
             p.left = remove(p.left, toDelete);
-        else if (compare(toDelete, p.data) > 0)
+        } else if (compare(toDelete, p.data) > 0) {
             p.right = remove(p.right, toDelete);
-        else {
-            if (p.left == null) return p.right;
-            else if (p.right == null) return p.left;
-            else {
-                p.data = retrieveData(p.left);
-                p.left = remove(p.left, p.data);
+        } else {
+            if (p.left == null) {
+                return p.right;
+            } else if (p.right == null) {
+                return p.left;
+            } else {
+                p.data = retrieveData(p.right);
+                p.right = remove(p.right, p.data);
             }
         }
         return p;
     }
 
     private T retrieveData(Node<T> p) {
-        while (p.right != null) p = p.right;
+        while (p.right != null) {
+            p = p.left;
+        }
         return p.data;
     }
 
     void print() {
-        treeSorter(root);
-        System.out.println();
-    }
-
-    private void treeSorter(Node r) {
-        if (r != null) {
-            treeSorter(r.left);
-            System.out.print(r + " ");
-            treeSorter(r.right);
-        }
+        root.print();
     }
 
     private static class Node<E> {
@@ -117,6 +112,18 @@ public class Tree<T extends Comparable<T>> {
 
         public String toString() {
             return data.toString();
+        }
+
+        void print() {
+            print("", this, false);
+        }
+
+        void print(String prefix, Node n, boolean isLeft) {
+            if (n != null) {
+                print(prefix + (isLeft ? "  " : "  "), n.left, true);
+                System.out.println(prefix + (isLeft ? "" : "") + n.data);
+                print(prefix + (isLeft ? "  " : "  "), n.right, false);
+            }
         }
     }
 }
